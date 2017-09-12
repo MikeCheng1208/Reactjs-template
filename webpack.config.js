@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const config = {
     context: path.resolve(__dirname, 'src'),
     entry: {
-        index: 'index'
+        App: 'App'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
