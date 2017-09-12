@@ -18,6 +18,10 @@ webpack -p
 
 ## 修改記錄
 
+
+### 2017/9/12
+ - babel presets 掛入 stage-2 拿掉 stage-3
+
 ### 2017/7/12
  - 更新套件 webpack更新至3.0
  - 加入sass & scss的使用
