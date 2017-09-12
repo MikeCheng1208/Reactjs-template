@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from './pages/home';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
 require("index.html");   
 require("css/index.styl");
 let filename = 'mike.jpg';
