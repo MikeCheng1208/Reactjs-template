@@ -19,6 +19,9 @@ webpack -p
 ## 修改記錄
 
 
+### 2018/1/11
+ - 更新套件版本
+
 ### 2017/9/12
  - babel presets 掛入 stage-2 拿掉 stage-3
 
