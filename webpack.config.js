@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = {
     context: path.resolve(__dirname, 'src'),
     entry: {
@@ -9,6 +10,18 @@ const config = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/[name].js?[hash:8]',
         publicPath: "/"
+    },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /node_modules/,
+                    name: 'vendor',
+                    chunks: 'initial',
+                    enforce: true
+                }
+            }
+        }
     },
     devServer: {
         compress: true,
@@ -46,20 +59,8 @@ const config = {
         ],
         extensions: ['.js']
     },
-    plugins: [
-    ],
     module:{
         rules:[
-            {
-                test: /\.(html)$/,
-                use: 'file-loader?name=[name].[ext]',
-                include: path.resolve('src')
-            },
-            {
-                test: /\.(json)$/,
-                use: 'file-loader?name=[path][name].[ext]',
-                include: path.resolve('src/api')
-            },
             {
                 test: /\.(sass|scss)$/,
                 use: [
@@ -69,11 +70,6 @@ const config = {
                     'sass-loader'
                 ],
                 include: path.resolve('src/css'),
-            },
-            {
-                test: /\.(pug)$/,
-                use: ['file-loader?name=[name].html', 'pug-html-loader?exports=false&pretty'],
-                include: path.resolve('src')
             },
             {
                 test: /\.(js)$/,
@@ -110,7 +106,19 @@ const config = {
         alias: {
             'scss-loader': 'sass-loader',
         },
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: '標題',
+            filename: 'index.html',
+            template: 'html/template.html'
+        }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            "window.jQuery": "jquery"
+        })
+    ]
 };
 
 module.exports = config;
