@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = {
     context: path.resolve(__dirname, 'src'),
     entry: {
-        App: 'App'
+        index: 'index'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -51,9 +51,6 @@ const config = {
         modules: [
             path.resolve('src'),
             path.resolve('src/html'),
-            path.resolve('src/js'),
-            path.resolve('src/js/lib'),
-            path.resolve('src/api'),
             path.resolve('src/images'),
             path.resolve('node_modules')
         ],
@@ -69,26 +66,11 @@ const config = {
                     'postcss-loader',
                     'sass-loader'
                 ],
-                include: path.resolve('src/css'),
+                include: path.resolve('src'),
             },
             {
                 test: /\.(js)$/,
                 use: 'babel-loader',
-                include: path.resolve('src')
-            },
-            {
-                test: /\.(jpe?g|png|gif|svg)$/i,
-                use: 'url-loader?limit=2000&name=[path][name].[ext]?[hash:8]',
-                include: path.resolve('src')
-            },
-            {
-                test: /\.(styl)$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'postcss-loader',
-                    'stylus-loader'
-                ],
                 include: path.resolve('src')
             },
             {
@@ -99,6 +81,38 @@ const config = {
                     'postcss-loader'
                 ],
                 include: path.resolve('src')
+            },
+            {
+                test: /\.(jpe?g|png|gif|ico)$/,
+                include: path.resolve('src/images'),
+                use:[
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 3000,
+                            name:'[path][name].[ext]?[hash:8]'
+                        }
+                    },
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                            mozjpeg: {
+                                progressive: true,
+                                quality: 65
+                            },
+                            optipng: {
+                                enabled: false,
+                            },
+                            pngquant: {
+                                quality: '65-90',
+                                speed: 4
+                            },
+                            gifsicle: {
+                                interlaced: false,
+                            }
+                        }
+                    }
+                ]
             }
         ]
     },
