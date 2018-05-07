@@ -116,11 +116,6 @@ const config = {
             }
         ]
     },
-    resolveLoader: {
-        alias: {
-            'scss-loader': 'sass-loader',
-        },
-    },
     plugins: [
         new HtmlWebpackPlugin({
             title: '標題',
