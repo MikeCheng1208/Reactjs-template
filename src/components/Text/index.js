@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import "./Box.scss";
 class Box extends Component {
     render() {
         return (
