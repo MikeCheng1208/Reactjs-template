@@ -1,6 +1,6 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = {
     context: path.resolve(__dirname, 'src'),
     entry: {
@@ -9,7 +9,7 @@ const config = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/[name].js?[hash:8]',
-        publicPath: "/"
+        publicPath: process.env.NODE_ENV === "development" ? "/" : "./"
     },
     optimization: {
         splitChunks: {
@@ -69,9 +69,15 @@ const config = {
                 include: path.resolve('src'),
             },
             {
+                test: /\.(woff|woff2|ttf|eot)$/,
+                loader: 'file-loader',
+                options: {
+                  name: '[path][name].[ext]?[hash:8]'
+                }
+            },
+            {
                 test: /\.(js)$/,
-                use: 'babel-loader',
-                include: path.resolve('src')
+                use: 'babel-loader'
             },
             {
                 test: /\.(css)$/,
@@ -118,15 +124,13 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: '標題',
+            title: 'Webpack 前端自動化開發',
             filename: 'index.html',
             template: 'html/template.html'
         }),
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            "window.jQuery": "jquery"
-        })
+        new CopyWebpackPlugin([
+            { from: 'assets', to: 'assets' },
+        ]),
     ]
 };
 
