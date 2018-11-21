@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components'
 import { app as appActions} from '../actions';
-import Box from './Box/';
 
 const Button = styled.button`
     margin-right: 30px;
