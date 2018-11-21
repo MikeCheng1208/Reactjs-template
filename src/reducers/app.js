@@ -1,7 +1,8 @@
-import { OPEN_LOGIN_FORM, CLOSE_LOGIN_FORM } from '../constants';
+import { OPEN_LOGIN_FORM, CLOSE_LOGIN_FORM, TEST_ASYNC } from '../constants';
 
 const initialState = {
     isOpenLoginForm: false,         /** 是否開啟登入視窗 */
+    AsyncData: {}
 };
 
 export default (state = initialState, action) => {
@@ -15,6 +16,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isOpenLoginForm: false,
+            }
+        case TEST_ASYNC:
+            return {
+                ...state,
+                AsyncData: {...action.payload},
             }
         default:
             return state 

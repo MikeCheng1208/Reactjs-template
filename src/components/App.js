@@ -21,6 +21,11 @@ class App extends Component {
         this.props.dispatch(appActions.closeLoginForm());
     }
 
+    handleTestAsync = () => {
+        const data = { name: "mike" };
+        this.props.dispatch(appActions.asyncTestAsync(data));
+    }
+
     componentDidMount(){
         console.log('redux: ',this.props.app);
     }
@@ -31,6 +36,7 @@ class App extends Component {
                 <H1>Webpack 前端自動化開發</H1>
                 <Button onClick={this.handleOpenLoginForm}>open</Button>
                 <Button onClick={this.handleCloseLoginForm}>clost</Button>
+                <Button onClick={this.handleTestAsync}>Submit data</Button>
             </div>
         )
     }
